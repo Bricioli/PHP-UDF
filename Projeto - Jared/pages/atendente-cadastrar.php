@@ -1,0 +1,35 @@
+<h1 class="display-6"><i class="far fa-id-badge"></i> Cadastrar Atendente</h1>
+<form action="?page=atendente-salvar" method="POST">
+	<input type="hidden" name="acao" value="cadastrar">
+		<div class="row g-2">
+			<div class="col-md">
+				<div class="form-floating">
+					<input type="text" name="nome_atendente" class="form-control" id="floatingNomeAtendente" placeholder="Nome do Atendente">
+					<label for="floatingNomeAtendente">Nome do Atendente</label>
+				</div>
+			</div>
+			<div class="col-md">
+				<div class="form-floating">
+					<select name="biblioteca_id_biblioteca" class="form-select" id="floatingSelectGrid" aria-label="Floating label select example">
+						<option selected>Selecione a Biblioteca</option>
+						<?php
+							$sql = "SELECT * FROM biblioteca";
+							$res = $conn->query($sql) or die($conn->error);
+							if($res->num_rows > 0){
+								while($row = $res->fetch_object()){
+									print "<option value='".$row->id_biblioteca."'>";
+									print $row->nome_biblioteca."</option>";
+								}
+							}else{
+								print "<option>Não há bibliotecas cadastradas</option>";
+							}
+						?>
+					</select>
+					<label for="floatingSelectGrid">Biblioteca</label>
+				</div>
+			</div>
+	</div>
+	<div class="mb-3">
+		<button type="submit" class="btn btn-outline-danger mt-3">Enviar</button>
+	</div>
+</form>
